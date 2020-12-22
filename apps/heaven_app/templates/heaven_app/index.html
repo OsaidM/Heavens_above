@@ -10,12 +10,12 @@
 
   <title>Heaven's Above</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  {%load static%}
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
 
-  <!-- Custom styles for this template -->
-  <link href="css/modern-business.css" rel="stylesheet">
-
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
 </head>
 
 <body>
@@ -37,6 +37,7 @@
             <a class="nav-link" href="#">Contact</a>
           </li>
         </ul>
+        <a class="nav-link" href="#">Login/Register</a>
     </div>
 </nav>
 
@@ -201,9 +202,9 @@
       <p class="m-0 text-center text-white">Copyright &copy; Heaven's Above 2020</p>
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+    <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
 
 </body>
 

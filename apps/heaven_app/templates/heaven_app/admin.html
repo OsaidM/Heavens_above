@@ -3,18 +3,16 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-      {%load static%}
-  <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
-
-  <title>Modern Business - Start Bootstrap Template</title>
-
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Heaven's Above  - Admin</title>
+    {%load static%}
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
 </head>
 
 <body>
@@ -26,16 +24,17 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
             </ul>
+            <a class="nav-link" href="#">Login/Register</a>
         </div>
     </nav>
 <!-- Demo header-->
@@ -72,84 +71,84 @@
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade shadow rounded show active p-5" id="v-pills-all-users" role="tabpanel" aria-labelledby="v-pills-all-users-tab">
                         <h4 class="font-italic mb-4">All Users</h4>
-		          <table class="table">
-                    <thead>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <tr>
-						   <th>ID</th>
-                           <th>Firstname</th>
-                           <th>Lastname</th>
-                           <th>Email</th>
-						   <th>Address</th>
-						   <th>&nbsp;</th>
-						   <th>&nbsp;</th>
+                            <td>1</td>
+                            <td>First</td>
+                            <td>Second</td>
+                            <td>email@example.com</td>
+                            <td>Address</td>
+                            <td><a href="#">Edit</a></td>
+                            <td><a href="#">Delete</a></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                       <tr>
-                           <td>1</td>
-                           <td>First</td>
-						   <td>Second</td>
-                           <td>email@example.com</td>
-						   <td>Address</td>
-						   <td><a href="#">Edit</a></td>
-						   <td><a href="#">Delete</a></td>
-                       </tr>
-                     </tbody>
-                     </table>	
+                        </tbody>
+                        </table>	
                     </div>
                     
                     <div class="tab-pane fade shadow rounded p-5" id="v-pills-all-products" role="tabpanel" aria-labelledby="v-pills-all-products-tab">
                         <h4 class="font-italic mb-4">All Products</h4>
-				  <table class="table">
-                    <thead>
-                        <tr>
-						   <th>ID</th>
-                           <th>Title</th>
-                           <th>Price</th>
-						   <th>Stock Level</th>
-						   <th>&nbsp;</th>
-						   <th>&nbsp;</th>
-                        </tr>
-                    </thead>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Stock Level</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            </tr>
+                        </thead>
                     <tbody>
-                       <tr>
-                           <td>1</td>
-                           <td>Product</td>
-						   <td>100</td>
-						   <td>1000</td>
-						   <td><a href="#">Edit</a></td>
-						   <td><a href="#">Delete</a></td>
-                       </tr>
-                     </tbody>
-                     </table>	
+                        <tr>
+                            <td>1</td>
+                            <td>Product</td>
+                            <td>100</td>
+                            <td>1000</td>
+                            <td><a href="#">Edit</a></td>
+                            <td><a href="#">Delete</a></td>
+                        </tr>
+                    </tbody>
+                    </table>	
                     </div>
                     
                     <div class="tab-pane fade shadow rounded p-5" id="v-pills-all-orders" role="tabpanel" aria-labelledby="v-pills-all-orders-tab">
                         <h4 class="font-italic mb-4">All Orders</h4>
-				  <table class="table">
+                    <table class="table">
                     <thead>
                         <tr>
-						   <th>ID</th>
-                           <th>Product Title</th>
-                           <th>Price</th>
-                           <th>Quantity</th>
-						   <th>Total</th>
-						   <th>&nbsp;</th>
-						   <th>&nbsp;</th>
+                            <th>ID</th>
+                            <th>Product Title</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                           <td>1</td>
-                           <td>Product</td>
-						   <td>100</td>
-                           <td>2</td>
-						   <td>200</td>
-						   <td><a href="#">Edit</a></td>
-						   <td><a href="#">Delete</a></td>
-                       </tr>
-                     </tbody>
-                     </table>	
+                        <tr>
+                            <td>1</td>
+                            <td>Product</td>
+                            <td>100</td>
+                            <td>2</td>
+                            <td>200</td>
+                            <td><a href="#">Edit</a></td>
+                            <td><a href="#">Delete</a></td>
+                        </tr>
+                        </tbody>
+                        </table>	
                     </div>
                     
                     <div class="tab-pane fade shadow rounded p-5" id="v-pills-new-product" role="tabpanel" aria-labelledby="v-pills-new-product-tab">
@@ -202,17 +201,20 @@
     </div>
 </section>
 
-  <!-- Footer -->
-  <footer class="py-4 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-    </div>
-    <!-- /.container -->
-  </footer>
+    <!-- Footer -->
+    <footer class="py-4 bg-dark">
+        <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+        </div>
+        <!-- /.container -->
+    </footer>
 
-  <!-- Bootstrap core JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+    <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
 </body>
 
 </html>

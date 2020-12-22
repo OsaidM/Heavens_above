@@ -27,12 +27,12 @@
     opacity: 1;
 }
 .tab-pane{
-background: #999999;
+background: #e1e1e1;
 }
 .mb-4{
-color: #fff;
+color: #333;
 }
-=======
+/* ======= */
 /*!
  * Start Bootstrap - Modern Business (https://startbootstrap.com/template/modern-business)
  * Copyright 2013-2020 Start Bootstrap
@@ -89,4 +89,3 @@ color: #fff;
     footer{
         position: sticky;
     }
->>>>>>> 0ee48c084cb90aef535cbe06314841c0b369a584

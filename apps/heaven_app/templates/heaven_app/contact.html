@@ -10,11 +10,11 @@
 
   <title>Heaven's Above  - Contact</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/modern-business.css" rel="stylesheet">
+  {%load static%}
+    <!-- Custom styles for this template -->
+    <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'heaven_app/css/modern-business.css'%}" rel="stylesheet">
 
 </head>
 
@@ -37,6 +37,7 @@
             <a class="nav-link" href="#">Contact</a>
           </li>
         </ul>
+        <a class="nav-link" href="#">Login/Register</a>
     </div>
 </nav>
 
@@ -129,13 +130,13 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+  <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
 
   <!-- Contact form JavaScript -->
   <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
-  <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
+  <script src="{% static 'heaven_app/js/jqBootstrapValidation.js' %}"></script>
+  <script src="{% static 'heaven_app/js/contact_me.js' %}"></script>
 
 </body>
 
