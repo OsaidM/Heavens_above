@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 .nav-pills-custom .nav-link {
     color: #0000FF;
     background: #999999;
@@ -88,4 +88,9 @@ color: #333;
     }
     footer{
         position: sticky;
+    }
+
+    .row_for_buttons{
+        display: flex;
+        justify-content: center;
     }
