@@ -7,6 +7,9 @@ def root(request):
 def details(request):
     return render(request, 'heaven_app/details.html')
 
+def order(request):
+    return render(request, 'heaven_app/order.html')
+
 def signup(request):
     return render(request, 'heaven_app/signup.html')
 
