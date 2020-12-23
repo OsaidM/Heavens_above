@@ -9,7 +9,7 @@ urlpatterns = [
     path('search', views.search),
     path('autocomplete', views.autocomplete, name="autocomplete"),
     path('signup', views.signup),
-    path('details', views.details),
+    path('details/<int:p_id>', views.details),
     path('order', views.order),
     path('about', views.about),
     path('contact', views.contact),

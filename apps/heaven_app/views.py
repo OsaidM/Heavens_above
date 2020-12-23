@@ -37,11 +37,10 @@ def autocomplete(request):
         titles = list()
         for product in qs:
             titles.append(product.title)
-        # titles = [product.title for product in qs]
         return JsonResponse(titles, safe=False)
 
-def details(request):
-    this_product = Product.objects.get(id=2)
+def details(request,p_id):
+    this_product = Product.objects.get(id=p_id)
     userslike=this_product.like.all()
     reviews=Review.objects.all()
     context= {
