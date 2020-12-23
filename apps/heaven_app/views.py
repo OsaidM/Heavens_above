@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from django.http import JsonResponse
 from django.core.paginator import Paginator #import Paginator
 
-=======
-from django.shortcuts import render,redirect
-from .models import *
->>>>>>> 9da95145cbb68f69d77786061732ecba446db90e
 # Create your views here.
 def root(request):
     products = Product.objects.all()
