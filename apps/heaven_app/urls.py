@@ -13,4 +13,6 @@ urlpatterns = [
     path('contact', views.contact),
     path('account', views.account),
     path('admin', views.admin),
+    path('like', views.like),
+    path('review', views.review),
 ]
