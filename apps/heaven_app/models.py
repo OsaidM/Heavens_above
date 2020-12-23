@@ -51,6 +51,9 @@ class Product(models.Model):
     like = models.ManyToManyField(User, related_name = 'liked_products')
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
+    
+    def __str__(self):
+        return self.title
 
 
 class Review(models.Model):

@@ -112,3 +112,11 @@ color: #333;
         display: flex;
         justify-content: center;
     }
+
+    .search{
+        margin:20px auto  0px auto;
+    }
+    #button-addon2{
+        color: #fff;
+        background-color: #71446f;
+    }

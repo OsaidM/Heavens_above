@@ -6,6 +6,8 @@ from . import views
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', views.root),
+    path('search', views.search),
+    path('autocomplete', views.autocomplete, name="autocomplete"),
     path('signup', views.signup),
     path('details', views.details),
     path('order', views.order),
