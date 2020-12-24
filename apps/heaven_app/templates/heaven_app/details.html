@@ -32,8 +32,19 @@
             <li class="nav-item active">
                 <a class="nav-link" href="contact">Contact</a>
             </li>
+            {%if 'user_id' in request.session%}
+            <li class="nav-item active">
+                <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {%else%}
+            <li class="nav-item active">
+                <a class="nav-link" href="/signup">Login/Register</a>
+            </li>
+            {%endif%}
         </ul>
-        <a class="nav-link" href="signup">Login/Register</a>
     </div>
 </nav>
 
@@ -72,7 +83,8 @@
         <div class="panel panel-default widget">
             <div class="panel-heading">
                 <span class="glyphicon glyphicon-comment"></span>
-                <h3 class="panel-title"> Recent Reviews</h3>
+                <h3 class="panel-title">
+                    Recent Reviews</h3>
                 <span class="label label-info">Number of Reviews: {{myreviews.count}}</span>
             </div>
             <div class="panel-body">

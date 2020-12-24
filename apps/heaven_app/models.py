@@ -22,7 +22,6 @@ this_user.liked_products.add(this_product)
 Create new review:
 Review.objects.create(content='asfasbdafdsfbf',product_id=this_product,user_id=this_user)
 '''
-
 class UserManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
@@ -79,7 +78,6 @@ class User(models.Model):
     updated_at = models.DateField(auto_now_add = True)
     objects = UserManager()
 
-
 class Product(models.Model):
     title = models.CharField(max_length = 45)
     description = models.TextField()
@@ -88,10 +86,8 @@ class Product(models.Model):
     like = models.ManyToManyField(User, related_name = 'liked_products')
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
-    
     def __str__(self):
         return self.title
-
 
 class Review(models.Model):
     content= models.TextField(null=False)

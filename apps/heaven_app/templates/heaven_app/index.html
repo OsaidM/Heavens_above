@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -15,7 +13,6 @@
     <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
     <!-- Bootstrap core CSS -->
     <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
-
 </head>
 <body>
 
@@ -36,9 +33,8 @@
             <a class="nav-link" href="/contact">Contact</a>
           </li>
           {%if 'user_id' in request.session%}
-          
           <li class="nav-item active">
-            <a class="nav-link" href="/account">Profile</a>
+            <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="/logout">Logout</a>
@@ -201,7 +197,6 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
-    <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
   <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
 
 

@@ -37,8 +37,19 @@
         <li class="nav-item active">
           <a class="nav-link" href="contact">Contact</a>
         </li>
+        {%if 'user_id' in request.session%}
+        <li class="nav-item active">
+          <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {%else%}
+        <li class="nav-item active">
+          <a class="nav-link" href="/signup">Login/Register</a>
+        </li>
+        {%endif%}
       </ul>
-      <a class="nav-link" href="signup">Login/Register</a>
     </div>
 
 </nav>

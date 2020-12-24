@@ -12,6 +12,13 @@
   <!-- Bootstrap core CSS -->
   <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
   <!-- Custom styles for this template -->
+  <style>
+    #tableform{
+      padding: 5%;
+      display: flex;
+      justify-content: space-around;
+    }
+  </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -30,14 +37,26 @@
           <li class="nav-item active">
             <a class="nav-link" href="contact">Contact</a>
           </li>
+          {%if 'user_id' in request.session%}
+          <li class="nav-item active">
+            <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+          {%else%}
+          <li class="nav-item active">
+            <a class="nav-link" href="/signup">Login/Register</a>
+          </li>
+          {%endif%}
         </ul>
-        <a class="nav-link" href="signup">Login/Register</a>
       </div>
   </nav>
     <div class="container"> 
-      <div class="row">
-        <div class="m-5 col-md-4 mx-auto">
-          <form>
+      <div class="row" id="tableform">
+          <form action="/update/{{this_user.id}}" method='POST'>
+            {%csrf_token%}
+            <h3>Edit Your Info:</h3>
             <div class="form-group">
             <label for="first_name">First Name</label>
             <input type="text" class="form-control" id="first_name" name="first_name" placeholder="{{first_name}}">
@@ -56,7 +75,32 @@
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
           </form>
-        </div>
+          <div id="card">
+            <table class="table table-striped table-dark">
+              <h3>Account Information:</h3>
+              <br>
+              <thead class="thead-dark">
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">First Name:</th>
+                  <td>{{this_user.first_name}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Last Name:</th>
+                  <td>{{this_user.last_name}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Email:</th>
+                  <td>{{this_user.email}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Address:</th>
+                  <td>{{this_user.address}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
       </div>
   </div>
 

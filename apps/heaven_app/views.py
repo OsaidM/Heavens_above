@@ -3,9 +3,13 @@ from .models import *
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.http import JsonResponse
+from django.core.paginator import Paginator #import Paginator
 import bcrypt
 
 # Create your views here.
+def signup(request):
+    return render(request, 'heaven_app/signup.html')
 def register(request):
     print('*'*80)
     print("in the register method")
@@ -41,7 +45,6 @@ def login(request):
             return redirect ('/')
     else:
         return redirect ('/')
-        
 def root(request):
     products = Product.objects.all()
     paginator = Paginator(products, 10)
@@ -95,7 +98,6 @@ def order(request,p_id):
         'myproduct': this_product,
     }
     return render(request, 'heaven_app/order.html',context)
-
 def post_order(request,p_id):
     this_product = Product.objects.get(id=p_id)
     print(this_product, '/*' *15)
@@ -111,14 +113,15 @@ def post_order(request,p_id):
         return redirect('/order/'+format(p_id))
     else:
         return redirect('/')
-def signup(request):
-    return render(request, 'heaven_app/signup.html')
-
 def admin(request):
     return render(request, 'heaven_app/admin.html')
 
-def account(request):
-    return render(request, 'heaven_app/account.html')
+def account(request,u_id):
+    this_user=User.objects.get(id=u_id)
+    context={
+        'this_user': this_user
+    }
+    return render(request, 'heaven_app/account.html',context)
 
 def contact(request):
     return render(request, 'heaven_app/contact.html')
@@ -130,7 +133,7 @@ def logout(request):
     if "user_id" in request.session:
         del request.session["user_id"]
     return redirect('/')
-
+    
 def like(request, p_id):
     this_user = User.objects.get(id=2)
     this_product = Product.objects.get(id=p_id)
@@ -143,4 +146,17 @@ def review(request, p_id):
     content_from_form = request.POST['content']
     Review.objects.create(content=content_from_form,product_id=this_product,user_id=this_user)
     return redirect('/details/'+ format(p_id))
-    return redirect('/details')
+
+def update(request, u_id):
+    print('*'*80)
+    print("in the update method")
+    if request.method =='POST': 
+        updates=User.objects.get(id=u_id)
+        updates.first_name=request.POST['first_name']
+        updates.last_name=request.POST['last_name']
+        updates.email=request.POST['email']
+        updates.address=request.POST['address']
+        updates.save()
+        return redirect (f'/account/{u_id}')
+    else:
+        return redirect ('/account')
