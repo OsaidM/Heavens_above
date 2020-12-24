@@ -108,11 +108,9 @@ color: #333;
         box-shadow: 5px 5px 5px #000;
         z-index: 10001;
     }
-    #pagination{
+    #pagination {
         display: flex;
         justify-content: center;
-<<<<<<< HEAD
-=======
     }
 
     .search{
@@ -146,5 +144,4 @@ color: #333;
     }
     .alert{
         width: 100%;
->>>>>>> 1f3de7e9e6ce4b31d74774df3f861a4d838d8306
     }

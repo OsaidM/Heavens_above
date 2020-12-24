@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from django.contrib import messages
+from django.http import JsonResponse
+from django.core.paginator import Paginator #import Paginator
 import bcrypt
-
-# Create your views here.
-def root(request):
-    return render(request, 'heaven_app/index.html')
 
 def signup(request):
     return render(request, 'heaven_app/signup.html')
@@ -47,15 +44,7 @@ def login(request):
     else:
         return redirect ('/')
 
-def details(request):
-    return render(request, 'heaven_app/details.html')
-=======
-from django.shortcuts import render,redirect
-from .models import *
-from django.http import JsonResponse
-from django.core.paginator import Paginator #import Paginator
 
-# Create your views here.
 def root(request):
     products = Product.objects.all()
     paginator = Paginator(products, 5)
@@ -101,32 +90,30 @@ def details(request,p_id):
         'userslikes': userslike,
     }
     return render(request, 'heaven_app/details.html',context)
->>>>>>> 1f3de7e9e6ce4b31d74774df3f861a4d838d8306
 
 def order(request):
     return render(request, 'heaven_app/order.html')
 
-def signup(request):
-    return render(request, 'heaven_app/signup.html')
-
 def admin(request):
     return render(request, 'heaven_app/admin.html')
 
-def account(request):
-    return render(request, 'heaven_app/account.html')
+def account(request,u_id):
+    this_user=User.objects.get(id=u_id)
+    context={
+        'this_user': this_user
+    }
+    return render(request, 'heaven_app/account.html',context)
 
 def contact(request):
     return render(request, 'heaven_app/contact.html')
 
 def about(request):
     return render(request, 'heaven_app/about.html')
-<<<<<<< HEAD
 
 def logout(request):
     if "user_id" in request.session:
         del request.session["user_id"]
     return redirect('/')
-=======
 def like(request, p_id):
     this_user = User.objects.get(id=2)
     this_product = Product.objects.get(id=p_id)
@@ -138,5 +125,17 @@ def review(request):
     content_from_form = request.POST['content']
     Review.objects.create(content=content_from_form,product_id=this_product,user_id=this_user)
     return redirect('/details')
-    
->>>>>>> 1f3de7e9e6ce4b31d74774df3f861a4d838d8306
+
+def update(request, u_id):
+    print('*'*80)
+    print("in the update method")
+    if request.method =='POST': 
+        updates=User.objects.get(id=u_id)
+        updates.first_name=request.POST['first_name']
+        updates.last_name=request.POST['last_name']
+        updates.email=request.POST['email']
+        updates.address=request.POST['address']
+        updates.save()
+        return redirect (f'/account/{u_id}')
+    else:
+        return redirect ('/account')

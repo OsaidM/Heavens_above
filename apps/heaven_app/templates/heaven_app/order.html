@@ -21,18 +21,6 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-<<<<<<< HEAD
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                </ul>
-            <a class="nav-link" href="#">Login/Register</a>
-=======
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item active">
@@ -41,9 +29,19 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="contact">Contact</a>
                 </li>
+                {%if 'user_id' in request.session%}
+                <li class="nav-item active">
+                  <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                {%else%}
+                <li class="nav-item active">
+                  <a class="nav-link" href="/signup">Login/Register</a>
+                </li>
+                {%endif%}
             </ul>
-            <a class="nav-link" href="signup">Login/Register</a>
->>>>>>> 1f3de7e9e6ce4b31d74774df3f861a4d838d8306
         </div>
     </nav>
 
