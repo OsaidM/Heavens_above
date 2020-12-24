@@ -23,6 +23,7 @@ this_user.liked_products.add(this_product)
 Create new review:
 Review.objects.create(content='asfasbdafdsfbf',product_id=this_product,user_id=this_user)
 '''
+<<<<<<< HEAD
 class UserManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
@@ -59,6 +60,8 @@ class UserManager(models.Manager):
         else:
             errors['password']='This password does not match this email. Please try again.'
             return errors
+=======
+>>>>>>> 1f3de7e9e6ce4b31d74774df3f861a4d838d8306
 
 class Role(models.Model):
     isAdmin = models.BooleanField(null=False)
@@ -74,11 +77,17 @@ class User(models.Model):
     email = models.CharField(max_length = 45)
     address = models.CharField(max_length = 255)
     password = models.CharField(max_length = 45)
+<<<<<<< HEAD
     role = models.ForeignKey(Role, related_name='role', on_delete= models.CASCADE, null = True)
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
     objects = UserManager()
 
+=======
+    role = models.ForeignKey(Role, related_name='role', on_delete= models.CASCADE)
+    created_at = models.DateField(auto_now_add = True)
+    updated_at = models.DateField(auto_now_add = True)
+>>>>>>> 1f3de7e9e6ce4b31d74774df3f861a4d838d8306
 
 
 class Product(models.Model):
@@ -89,6 +98,12 @@ class Product(models.Model):
     like = models.ManyToManyField(User, related_name = 'liked_products')
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
+<<<<<<< HEAD
+=======
+    
+    def __str__(self):
+        return self.title
+>>>>>>> 1f3de7e9e6ce4b31d74774df3f861a4d838d8306
 
 
 class Review(models.Model):

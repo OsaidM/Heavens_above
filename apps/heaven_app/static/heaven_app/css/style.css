@@ -111,4 +111,40 @@ color: #333;
     #pagination{
         display: flex;
         justify-content: center;
+<<<<<<< HEAD
+=======
+    }
+
+    .search{
+        margin:20px auto  0px auto;
+    }
+    #button-addon2{
+        color: #fff;
+        background-color: #71446f;
+    }
+    .panel{
+        width: 100%;
+        margin: 0 auto;
+    }
+    .row{
+        margin-top:0 ;
+    }
+    h6{
+        display: inline-block;
+    }
+    .d_col1{
+        margin-right: 20px;
+        padding: 10px;
+        height: fit-content;
+    }
+    .img-fluid{
+        width: fit-content;
+        box-shadow: 0px 0px 3px 1px grey;
+    }
+    .center{
+        text-align: center;
+    }
+    .alert{
+        width: 100%;
+>>>>>>> 1f3de7e9e6ce4b31d74774df3f861a4d838d8306
     }
