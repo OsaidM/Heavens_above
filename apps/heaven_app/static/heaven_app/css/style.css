@@ -124,9 +124,6 @@ color: #333;
         width: 100%;
         margin: 0 auto;
     }
-    .row{
-        margin-top:0 ;
-    }
     h6{
         display: inline-block;
     }
@@ -144,4 +141,17 @@ color: #333;
     }
     .alert{
         width: 100%;
+    }
+
+    .o_row{
+        margin-bottom: 80px;
+    }
+    .o_title{
+        margin-left: 30px;
+    }
+    .o_price{
+        width: fit-content;
+    }
+    .d_row{
+        margin-top: 0;
     }

@@ -38,33 +38,34 @@
     <div class="container">
 
         <!-- Page Heading/Breadcrumbs -->
-        <h1 class="mt-4 mb-3">'{Product title:}'</h1>
+        <h1 class="mt-4 mb-4 o_title">{{myproduct.title}}</h1>
         <!-- Portfolio Item Row -->
-        <div class="row">
-            <div class="col-md-7">
-                <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+        <div class="row o_row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="{% static 'heaven_app/img/'%}{{myproduct.image}}" alt="">
                 <br>
+                <h3 class="mt-4 mb-4 o_price">{{myproduct.price}}$</h3>
             </div>
-    
-            <div class="col-md-5">
+            
+            <div class="col-md-6">
                 <div class="form-box">
                     <div class="form-bottom">
-                        <form action="" method="post" class="registration-form">
+                        <form action="post_order/{{myproduct.id}}" method="POST" class="registration-form">
                             {% csrf_token %}
                             <div class="form-group row">
-                                <label for="first name" class="col-md-4 col-form-label">First name</label>
+                                <label for="first name" class="col-md-4 col-form-label">name</label>
                                 <div class="col">
-                                    <input type="text" name="first_name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+                                    <input type="text" name="o_name" placeholder="name..." class="form-first-name form-control" id="form-first-name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="birthday" class="col-md-4 col-form-label">Birth Date:</label>
                                 <div class="col">
-                                    <input type="date" class="form-control" id="birthday" name="birthday">
+                                    <input type="date" name="date_birth" class="form-control" id="birthday" name="birthday">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="address" class="col-md-5 col-form-label">Place of birth:</label>
+                                <label for="address" class="col-md-4 col-form-label">Place of birth:</label>
                                 <div class="col">
                                     <input type="text" name="address" placeholder="Address..." class="form-last-name form-control" id="address">
                                 </div>
@@ -72,11 +73,32 @@
                             <div class="form-group row">
                                 <label for="phone" class="col-md-4 col-form-label">Phone:</label>
                                 <div class="col">
-                                    <input type="text" name="address" class="form-control" id="phone" placeholder="phone">
+                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="phone">
                                 </div>
                             </div>
                             <div class="row justify-content-md-center button-signup">
-                                <button type="submit" id="complexConfirm" class="btn confirm btn-primary">Order</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Do you want to confirm your order {{myproduct.title}}?
+                                        </div>
+                                        <div class="modal-footer">
+                                        <a class="btn btn-secondary" data-dismiss="modal"> Cancel</a>
+                                        <button type="submit" href="/order/{{myproduct.id}}" class="btn btn-primary">Confirm</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <a href="/order/{{myproduct.id}}" class="btn btn-primary btn-product" data-toggle="modal" data-target="#exampleModal"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a>
                             </div>
                         </form>
                     </div>
@@ -92,6 +114,15 @@
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
         </div>
     </footer>
+
+
+    <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+    <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+        })
+    </script>
 </body>
 
 

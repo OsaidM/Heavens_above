@@ -6,7 +6,7 @@ from django.core.paginator import Paginator #import Paginator
 # Create your views here.
 def root(request):
     products = Product.objects.all()
-    paginator = Paginator(products, 5)
+    paginator = Paginator(products, 10)
     page_num = request.GET.get('page')
     page_obj = paginator.get_page(page_num)
     context = {
@@ -43,6 +43,7 @@ def details(request,p_id):
     this_product = Product.objects.get(id=p_id)
     userslike=this_product.like.all()
     reviews=Review.objects.all()
+    request.session['price']= this_product.price
     context= {
         'myproduct': this_product,
         'myreviews': reviews,
@@ -50,9 +51,28 @@ def details(request,p_id):
     }
     return render(request, 'heaven_app/details.html',context)
 
-def order(request):
-    return render(request, 'heaven_app/order.html')
+def order(request,p_id):
+    this_product = Product.objects.get(id=p_id)
+    context= {
+        'myproduct': this_product,
+    }
+    return render(request, 'heaven_app/order.html',context)
 
+def post_order(request,p_id):
+    this_product = Product.objects.get(id=p_id)
+    print(this_product, '/*' *15)
+    if request.method == 'POST':
+        this_name = request.POST['o_name']
+        this_date = request.POST['date_birth']
+        this_address = request.POST['address']
+        this_phone = request.POST['phone']
+        this_price = request.session['price']
+        Order.objects.create(name = this_name , date_of_birth =this_date, place_of_birth =this_address, phone = this_phone,total_price = this_price, user_id = User.objects.get(id = 1), product_id = Product.objects.get(id = p_id))
+        print(this_price, '/*\/' * 15)
+        del request.session['price']
+        return redirect('/order/'+format(p_id))
+    else:
+        return redirect('/')
 def signup(request):
     return render(request, 'heaven_app/signup.html')
 
@@ -72,10 +92,9 @@ def like(request, p_id):
     this_product = Product.objects.get(id=p_id)
     this_user.liked_products.add(this_product)
     return redirect('/details/'+ format(p_id))
-def review(request):
+def review(request, p_id):
     this_user = User.objects.get(id=2)
-    this_product = Product.objects.get(id=2)
+    this_product = Product.objects.get(id=p_id)
     content_from_form = request.POST['content']
     Review.objects.create(content=content_from_form,product_id=this_product,user_id=this_user)
-    return redirect('/details')
-    
+    return redirect('/details/'+ format(p_id))

@@ -12,7 +12,7 @@ Product.objects.create(title='starsframe',description='thshdishdhasd',image='asd
 ----
 
 create new order:
-Order.objects.create(name = 'stars',date_of_birth ='2020-12-23' ,place_of_birth ='ramallah',phone ='0597102030',user_id = User.objects.get(id = 1),product_id = Product.objects.get(id = 1))
+Order.objects.create(name = 'stars',date_of_birth ='2020-12-23' ,place_of_birth ='ramallah',phone ='0597102030',total_price = 0.0,user_id = User.objects.get(id = 1),product_id = Product.objects.get(id = 1))
 
 ---
 Create new like:
@@ -60,6 +60,7 @@ class Review(models.Model):
     content= models.TextField(null=False)
     product_id= models.ForeignKey(Product, on_delete=models.CASCADE)
     user_id= models.ForeignKey(User, on_delete=models.CASCADE)
+
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
 
@@ -68,8 +69,10 @@ class Order(models.Model):
     date_of_birth =  models.DateField()
     place_of_birth = models.CharField(max_length = 60)
     phone = models.CharField(max_length = 10)
+    total_price = models.FloatField(default= 0.0)
     user_id= models.ForeignKey(User, on_delete=models.CASCADE)
     product_id= models.ForeignKey(Product, on_delete=models.CASCADE)
+    
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
 

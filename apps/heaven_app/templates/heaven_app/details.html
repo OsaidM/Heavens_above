@@ -41,7 +41,7 @@
     <div class="container">
 
         <!-- Page Heading/Breadcrumbs -->
-        <h1 class="mt-4 mb-3">Product Details:</h1>
+        <h1 class="mt-4 mb-3">{{myproduct.title}}</h1>
         <!-- Portfolio Item Row -->
         <div class="row">
             <div class="col-md-6 center">
@@ -60,7 +60,7 @@
                         <a href="/like/{{myproduct.id}}" class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> <b>{{userslikes.count}}</b>
                     </div>
                     <div class="col-md-8">
-                        <a href="/order/{{myproduct.id}}" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a>
+                        <a href="/order/{{myproduct.id}}" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a>
                     </div>
                 </div>
                 <br>
@@ -81,7 +81,7 @@
                 <ul class="list-group">
 				{% for review in myreviews %}
                     <li class="list-group-item">
-                        <div class="row">
+                        <div class="row d_row">
                             <div class="alert alert-primary" role="alert">
                                 <div class="d_col1">
                                     <div class="comment-text">
@@ -98,7 +98,7 @@
                 </ul>
                 <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> More</a>
             </div>
-            <form action='/review' method='post'>
+            <form action='/review/{{myproduct.id}}' method='post'>
 			{% csrf_token %}
                 <div class="form-group">
                     <label for="comment">Your Review:</label>
@@ -121,7 +121,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
     <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
-
+    
 </body>
 
 </html>
