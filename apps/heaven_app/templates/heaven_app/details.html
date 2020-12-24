@@ -57,10 +57,9 @@
                 <div class="row_for_buttons">
                     <br>
                     <div class="col-md-4">
-                        <a href="/like" class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> <b>{{userslikes.count}}</b>
+                        <a href="/like/{{myproduct.id}}" class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> <b>{{userslikes.count}}</b>
                     </div>
                     <div class="col-md-8">
-                        <br>
                         <a href="/order/{{myproduct.id}}" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a>
                     </div>
                 </div>
@@ -83,12 +82,14 @@
 				{% for review in myreviews %}
                     <li class="list-group-item">
                         <div class="row">
-                            <div class="d_col1">
-                                <div class="comment-text">
-                                <h6>Comment:</h6> {{review.content}}
-                                </div>
-                                <div class="mic-info">
-                                    <h6>By:</h6> {{review.user_id.first_name}} {{review.user_id.last_name}} on {{review.created_at}}
+                            <div class="alert alert-primary" role="alert">
+                                <div class="d_col1">
+                                    <div class="comment-text">
+                                    <h6>Comment:</h6> {{review.content}}
+                                    </div>
+                                    <div class="mic-info">
+                                        <h6>By:</h6> {{review.user_id.first_name}} {{review.user_id.last_name}} on {{review.created_at}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

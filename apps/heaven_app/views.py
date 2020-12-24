@@ -6,7 +6,7 @@ from django.core.paginator import Paginator #import Paginator
 # Create your views here.
 def root(request):
     products = Product.objects.all()
-    paginator = Paginator(products, 10)
+    paginator = Paginator(products, 5)
     page_num = request.GET.get('page')
     page_obj = paginator.get_page(page_num)
     context = {
@@ -67,11 +67,11 @@ def contact(request):
 
 def about(request):
     return render(request, 'heaven_app/about.html')
-def like(request):
+def like(request, p_id):
     this_user = User.objects.get(id=2)
-    this_product = Product.objects.get(id=2)
+    this_product = Product.objects.get(id=p_id)
     this_user.liked_products.add(this_product)
-    return redirect('/details')
+    return redirect('/details/'+ format(p_id))
 def review(request):
     this_user = User.objects.get(id=2)
     this_product = Product.objects.get(id=2)

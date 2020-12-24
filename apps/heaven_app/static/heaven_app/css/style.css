@@ -134,7 +134,6 @@ color: #333;
         margin-right: 20px;
         padding: 10px;
         height: fit-content;
-        box-shadow: 0px 0px 3px 1px grey;
     }
     .img-fluid{
         width: fit-content;
@@ -142,4 +141,7 @@ color: #333;
     }
     .center{
         text-align: center;
+    }
+    .alert{
+        width: 100%;
     }

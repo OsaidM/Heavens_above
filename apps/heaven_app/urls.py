@@ -15,6 +15,6 @@ urlpatterns = [
     path('contact', views.contact),
     path('account', views.account),
     path('admin', views.admin),
-    path('like', views.like),
+    path('like/<int:p_id>', views.like),
     path('review', views.review),
 ]
