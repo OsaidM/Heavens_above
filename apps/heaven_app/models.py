@@ -10,7 +10,6 @@ User.objects.create(first_name = 'Omar', last_name = 'alqasem', email = 'omar@gm
 create new product:
 Product.objects.create(title='starsframe',description='thshdishdhasd',image='asdasdasd',price='99.89')
 ----
-
 create new order:
 Order.objects.create(name = 'stars',date_of_birth ='2020-12-23' ,place_of_birth ='ramallah',phone ='0597102030',total_price = 0.0,user_id = User.objects.get(id = 1),product_id = Product.objects.get(id = 1))
 
@@ -23,6 +22,43 @@ this_user.liked_products.add(this_product)
 Create new review:
 Review.objects.create(content='asfasbdafdsfbf',product_id=this_product,user_id=this_user)
 '''
+
+class UserManager(models.Manager):
+    def basic_validator(self, postData):
+        errors = {}
+        reuser=User.objects.filter(email=postData['email'])
+        if reuser:
+            errors['email']="There is already a user with this email address."
+            return errors
+        if len(postData['first_name'])<2:
+            errors["first_name"] = "Your first name should be at least 2 characters long."
+        if (postData['first_name']).isalpha() !=True:
+            errors["first_name2"] = "Your first name should be comprised only of letters."
+        if len(postData['last_name']) < 2:
+            errors["last_name"] = "Your last name should be at least 2 characters long."
+        if (postData['last_name']).isalpha() !=True:
+            errors["last_name2"] = "Your last name should be comprised only of letters."
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email']):
+            errors['email2'] = ("Your email address is not a valid format.")
+        if len(postData['password']) < 8:
+            errors["password"] = "Your password should be at least 8 characters long."
+        if postData['password'] !=postData['confirm_password']:
+            errors["confirm_password"] = "Your password confirmation does not match your password."
+        return errors
+    def login_validator(self, postData):
+        errors ={}
+        logged_user=User.objects.filter(email=postData['login_email'])
+        if logged_user:
+            user=logged_user[0]
+        else:
+            errors['email']='There is no user that matches this email. Please register.'
+            return errors
+        if bcrypt.checkpw(postData['login_password'].encode(), user.password.encode()):
+            return errors
+        else:
+            errors['password']='This password does not match this email. Please try again.'
+            return errors
 
 class Role(models.Model):
     isAdmin = models.BooleanField(null=False)
@@ -38,9 +74,10 @@ class User(models.Model):
     email = models.CharField(max_length = 45)
     address = models.CharField(max_length = 255)
     password = models.CharField(max_length = 45)
-    role = models.ForeignKey(Role, related_name='role', on_delete= models.CASCADE)
+    role = models.ForeignKey(Role, related_name='role', on_delete= models.CASCADE, null = True)
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
+    objects = UserManager()
 
 
 class Product(models.Model):

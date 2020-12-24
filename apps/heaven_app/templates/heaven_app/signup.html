@@ -22,23 +22,28 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="about">About</a>
+                    <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="contact">Contact</a>
+                    <a class="nav-link" href="#">Contact</a>
                 </li>
             </ul>
-            <a class="nav-link" href="signup">Login/Register</a>
         </div>
     </nav>
-
     <!-- Page Content -->
     <main class="sign-up">
         <div class="container">
             <div class="row">
+                {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+                {% endif %}
                 <div class="col col1 card border-secondary">
                     <div class="card-header">
                         <h3>Login to site</h3>
@@ -46,18 +51,18 @@
                     </div>
                     <div class="form-box">
                         <div class="form-bottom">
-                            <form action="" method="post" class="login-form">
+                            <form action="/login" method="post" class="login-form">
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <label for="email" class="col-md-3 col-form-label">Email: </label>
                                     <div class="col">
-                                    <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                    <input type="text" name="login_email" placeholder="Email..." class="form-email form-control" id="form-email">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="password" class="col-md-3 col-form-label">Password:</label>
                                     <div class="col">
-                                        <input type="password" class="form-control" id="password" placeholder="Password">
+                                        <input name="login_password" type="password" class="form-control" id="password" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="row justify-content-md-center button-signup">
@@ -76,7 +81,7 @@
                     </div>
                     <div class="form-box">
                         <div class="form-bottom">
-                            <form action="" method="post" class="registration-form">
+                            <form action="/register" method="post" class="registration-form">
                                 {% csrf_token %}
                                 <div class="form-group row">
                                     <label for="first name" class="col-md-4 col-form-label">First name</label>
@@ -103,21 +108,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="birthday" class="col-md-4 col-form-label">Birth Date:</label>
-                                    <div class="col">
-                                        <input type="date" class="form-control" id="birthday" name="birthday">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="inputPassword" class="col-md-4 col-form-label">Password:</label>
                                     <div class="col">
-                                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                        <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="confirmPassword" class="col-md-5 col-form-label">Confirm Password:</label>
+                                    <label for="confirmPassword" class="col-md-4 col-form-label">Confirm Password:</label>
                                     <div class="col">
-                                        <input type="password" class="form-control" id="inputPassword" placeholder="Confirm you password">
+                                        <input name="confirm_password" type="password" class="form-control" id="inputPassword" placeholder="Confirm you password">
                                     </div>
                                 </div>
                                 <div class="row justify-content-md-center button-signup">
