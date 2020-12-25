@@ -13,12 +13,16 @@
     <link rel="stylesheet" href="{% static 'heaven_app/css/style.css'%}">
     <!-- Bootstrap core CSS -->
     <link href="{% static 'heaven_app/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
 </head>
 <body>
 
   <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    
     <div class="container">
+      
     <a class="navbar-brand" href="/">Heavens above</a>
     </div>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -33,20 +37,31 @@
             <a class="nav-link" href="/contact">Contact</a>
           </li>
           {%if 'user_id' in request.session%}
+              {%if request.session.user_role %}
+          <li class="nav-item active">
+            <a class="nav-link" href="/admin/{{request.session.user_id}}">DashBoard</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+            {%else%}
           <li class="nav-item active">
             <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="/logout">Logout</a>
           </li>
-          {%else%}
-          <li class="nav-item active">
-            <a class="nav-link" href="/signup">Login/Register</a>
-          </li>
-          {%endif%}
+            {%endif%}
+            {%else%}
+            <li class="nav-item active">
+              <a class="nav-link" href="/signup">Login/Register</a>
+            </li>
+            {%endif%}
         </ul>
     </div>
 </nav>
+
+  <!-- carousel -->
   <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -84,9 +99,7 @@
 
   <!-- Page Content -->
   <div class="container">
-
     <h1 class="my-4">Welcome to Heavens Above!</h1>
-
     <!-- Marketing Icons Section -->
     <div class="row">
       <div class="col-lg-4 mb-4">
@@ -123,16 +136,18 @@
         </div>
       </div>
     </div>
-    <!-- /.row -->
+    <hr>
+
+    <!-- /.searchbar -->
     <form action="search" method="GET" class="form-inline search" >
       <div class="input-group mb-3">
-          <input type="text" class="form-control" name='q' id="product" placeholder="Enter a keyword" >
+          <input type="text" class="form-control" name='q' id="product1" placeholder="Enter a keyword" >
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="text" id="button-addon2">Go</button>
         </div>
       </div>
-    </form>    
-    
+    </form>       
+    <!-- /.row -->
     <div class="row">
       {%for p in product%}
       <div class="col-lg-4 col-sm-6 portfolio-item">
@@ -198,13 +213,10 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
   <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
-
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
     $(function () {
-        $("#product").autocomplete({
+        $("#product1").autocomplete({
             source: '{% url "autocomplete" %}',
             minLength: 2
         });

@@ -34,23 +34,41 @@
                     <a class="nav-link" href="contact">Contact</a>
                 </li>
                 {%if 'user_id' in request.session%}
+                    {%if request.session.user_role %}
                 <li class="nav-item active">
-                  <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
+                    <a class="nav-link" href="/admin/{{request.session.user_id}}">DashBoard</a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/logout">Logout</a>
                 </li>
-                {%else%}
+                    {%else%}
                 <li class="nav-item active">
-                  <a class="nav-link" href="/signup">Login/Register</a>
+                    <a class="nav-link" href="/account/{{request.session.user_id}}">Profile</a>
                 </li>
-                {%endif%}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+                    {%endif%}
+                    {%else%}
+                    <li class="nav-item active">
+                    <a class="nav-link" href="/signup">Login/Register</a>
+                    </li>
+            {%endif%}
             </ul>
         </div>
     </nav>
-<!-- Demo header-->
+<!-- header-->
 <section class="py-5 header">
     <div class="container py-4">
+
+
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="row">
             <div class="col-md-3">
                 <!-- Tabs nav -->
@@ -58,7 +76,7 @@
 					<h4>Admin Tools</h4>						
                     <a class="nav-link mb-3 p-3 shadow active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-all-users" role="tab" aria-controls="v-pills-all-users" aria-selected="true">
                         <i class="fa fa-user-circle-o mr-2"></i>
-                        <span class="font-weight-bold small text-uppercase">All Users</span></center>					
+                        <span class="font-weight-bold small text-uppercase">All Users</span>				
                     <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-all-products" role="tab" aria-controls="v-pills-all-products" aria-selected="false">
                         <i class="fa fa-calendar-minus-o mr-2"></i>
                         <span class="font-weight-bold small text-uppercase">All Products</span></a>
@@ -70,9 +88,9 @@
                     <a class="nav-link mb-3 p-3 shadow" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-new-product" role="tab" aria-controls="v-pills-new-product" aria-selected="false">
                         <i class="fa fa-check mr-2"></i>
                         <span class="font-weight-bold small text-uppercase">Create New Product</span></a>
-				    <a class="nav-link mb-3 p-3 shadow" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-new-user" role="tab" aria-controls="v-pills-new-user" aria-selected="false">
+                    <a class="nav-link mb-3 p-3 shadow" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-new-user" role="tab" aria-controls="v-pills-new-user" aria-selected="false">
                         <i class="fa fa-check mr-2"></i>
-                        <span class="font-weight-bold small text-uppercase">Create New User</span></a>
+                        <span class="font-weight-bold small text-uppercase">Create New Admin</span></a>
                     </div>
             </div>
 
@@ -80,7 +98,7 @@
             <div class="col-md-9">
                 <!-- Tabs content -->
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade shadow rounded show active p-5" id="v-pills-all-users" role="tabpanel" aria-labelledby="v-pills-all-users-tab">
+                    <div class="tab-pane fade shadow rounded show active p-3" id="v-pills-all-users" role="tabpanel" aria-labelledby="v-pills-all-users-tab">
                         <h4 class="font-italic mb-4">All Users</h4>
                     <table class="table">
                         <thead>
@@ -95,20 +113,22 @@
                             </tr>
                         </thead>
                         <tbody>
+						{% for user in myusers %}
                         <tr>
-                            <td>1</td>
-                            <td>First</td>
-                            <td>Second</td>
-                            <td>email@example.com</td>
-                            <td>Address</td>
-                            <td><a href="#">Edit</a></td>
-                            <td><a href="#">Delete</a></td>
+                            <td>{{user.id}}</td>
+                            <td>{{user.first_name}}</td>
+                            <td>{{user.last_name}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.address}}</td>
+                            <td><a href="/account/{{user.id}}">Edit</a></td>
+                            <td><a href="/deleteuser/{{user.id}}">Delete</a></td>
                         </tr>
+						{% endfor %}
                         </tbody>
                         </table>	
                     </div>
                     
-                    <div class="tab-pane fade shadow rounded p-5" id="v-pills-all-products" role="tabpanel" aria-labelledby="v-pills-all-products-tab">
+                    <div class="tab-pane fade shadow rounded p-4" id="v-pills-all-products" role="tabpanel" aria-labelledby="v-pills-all-products-tab">
                         <h4 class="font-italic mb-4">All Products</h4>
                     <table class="table">
                         <thead>
@@ -122,49 +142,54 @@
                             </tr>
                         </thead>
                     <tbody>
+					{% for product in myproducts %}
                         <tr>
-                            <td>1</td>
-                            <td>Product</td>
-                            <td>100</td>
-                            <td>1000</td>
-                            <td><a href="#">Edit</a></td>
-                            <td><a href="#">Delete</a></td>
+                            <td>{{product.id}}</td>
+                            <td>{{product.title}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{{product.quantity}}</td>
+                            <td><a href="/editproduct/{{product.id}}">Edit</a></td>
+                            <td><a href="/deleteproduct/{{product.id}}">Delete</a></td>
                         </tr>
+					{% endfor %}
                     </tbody>
                     </table>	
                     </div>
                     
-                    <div class="tab-pane fade shadow rounded p-5" id="v-pills-all-orders" role="tabpanel" aria-labelledby="v-pills-all-orders-tab">
+                    <div class="tab-pane fade shadow rounded p-4" id="v-pills-all-orders" role="tabpanel" aria-labelledby="v-pills-all-orders-tab">
                         <h4 class="font-italic mb-4">All Orders</h4>
                     <table class="table">
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Date</th>
+							<th>User ID</th>
+                            <th>User Name</th>
                             <th>Product Title</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>&nbsp;</th>
+                            <th>Product Price</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
+					{% for order in myorders %}
                         <tr>
-                            <td>1</td>
-                            <td>Product</td>
-                            <td>100</td>
-                            <td>2</td>
-                            <td>200</td>
-                            <td><a href="#">Edit</a></td>
-                            <td><a href="#">Delete</a></td>
+                            <td>{{order.id}}</td>
+							<td>{{order.created_at}}</td>
+							<td>{{order.user_id.id}}</td>
+                            <td>{{order.user_id.first_name}} {{order.user_id.last_name}}</td>
+							<td>{{order.product_id.title}}</td>
+                            <td>{{order.product_id.price}}</td>
+                            <td><a href="/deleteorder/{{order.id}}">Delete</a></td>
                         </tr>
+						{% endfor %}
                         </tbody>
                         </table>	
                     </div>
                     
                     <div class="tab-pane fade shadow rounded p-5" id="v-pills-new-product" role="tabpanel" aria-labelledby="v-pills-new-product-tab">
                         <h4 class="font-italic mb-4">Create New Product</h4>
-						<form>
+						<form action='/addproduct' method='post'>
+						{% csrf_token %}
                         <div class="form-group">
 						<label for="title">Product Title</label>
 						<input type="text" class="form-control" id="title" name="title" placeholder="Enter Product Title">
@@ -173,20 +198,21 @@
 						<label for="price">Price</label>
 						<input type="text" class="form-control" id="price" name="price" placeholder="Enter Product Price">
 						</div>
-						<div class="form-group">
-						<label for="quantity">Quantity</label>
-						<input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Product Quantity">
+                        <div class="form-group">
+						<label for="description">Description</label>
+						<input type="text" class="form-control" id="description" name="description" placeholder="Enter Product Description">
 						</div>
 						<div class="form-group">
 						<label for="image">Image</label>
-						<input type="file" class="form-control" id="file" name="file">
+						<input type="text" class="form-control" id="image" name="image" placeholder="Enter image name with extension">
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
 					<div class="tab-pane fade shadow rounded p-5" id="v-pills-new-user" role="tabpanel" aria-labelledby="v-pills-new-user-tab">
-                        <h4 class="font-italic mb-4">Create New User</h4>
-						<form>
+                        <h4 class="font-italic mb-4">Create New Admin</h4>
+						<form action='/addadmin' method='post'>
+						{% csrf_token %}
                         <div class="form-group">
 						<label for="first_name">First Name</label>
 						<input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name">
@@ -198,6 +224,10 @@
 						<div class="form-group">
 						<label for="email">Email</label>
 						<input type="text" class="form-control" id="email" name="email" placeholder="Enter Email Address">
+						</div>
+						<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
 						</div>
 						<div class="form-group">
 						<label for="address">Address</label>

@@ -58,6 +58,47 @@ class UserManager(models.Manager):
         else:
             errors['password']='This password does not match this email. Please try again.'
             return errors
+    def account_validator(self, postData):
+        errors = {}
+        reuser=User.objects.filter(email=postData['email'])
+        if reuser:
+            errors['email']="There is already a user with this email address."
+            return errors
+        if len(postData['first_name'])<2:
+            errors["first_name"] = "first name should be at least 2 characters long."
+        if (postData['first_name']).isalpha() !=True:
+            errors["first_name2"] = "first name should be comprised only of letters."
+        if len(postData['last_name']) < 2:
+            errors["last_name"] = "last name should be at least 2 characters long."
+        if (postData['last_name']).isalpha() !=True:
+            errors["last_name2"] = "last name should be comprised only of letters."
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email']):
+            errors['email2'] = ("email address is not a valid format.")
+        if len(postData['password']) < 8:
+            errors["password"] = "password should be at least 8 characters long."
+        return errors
+    
+    def admin_validator(self, postData):
+        errors = {}
+        reuser=User.objects.filter(email=postData['email'])
+        if reuser:
+            errors['email']="There is already a user with this email address."
+            return errors
+        if len(postData['first_name'])<2:
+            errors["first_name"] = "first name should be at least 2 characters long."
+        if (postData['first_name']).isalpha() !=True:
+            errors["first_name2"] = "first name should be comprised only of letters."
+        if len(postData['last_name']) < 2:
+            errors["last_name"] = "last name should be at least 2 characters long."
+        if (postData['last_name']).isalpha() !=True:
+            errors["last_name2"] = "last name should be comprised only of letters."
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email']):
+            errors['email2'] = ("email address is not a valid format.")
+        if len(postData['password']) < 8:
+            errors["password"] = "password should be at least 8 characters long."
+        return errors
 
 class Role(models.Model):
     isAdmin = models.BooleanField(null=False)

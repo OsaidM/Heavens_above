@@ -22,35 +22,28 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="/contact">Contact</a>
                 </li>
             </ul>
         </div>
     </nav>
-    {% if messages %}
-    <ul class="messages">    
-        {% for message in messages %}    
-        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
-        {% endfor %}
-    </ul>
-    {% endif %}
     <!-- Page Content -->
     <main class="sign-up">
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="container">
             <div class="row">
-                {% if messages %}
-                <ul class="messages">    
-                    {% for message in messages %}    
-                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
-                    {% endfor %}
-                </ul>
-                {% endif %}
                 <div class="col col1 card border-secondary">
                     <div class="card-header">
                         <h3>Login to site</h3>
@@ -58,6 +51,7 @@
                     </div>
                     <div class="form-box">
                         <div class="form-bottom">
+                            
                             <form action="/login" method="post" class="login-form">
                                 {% csrf_token %}
                                 <div class="form-group row">
@@ -140,7 +134,7 @@
     <!-- Footer -->
     <footer class="py-4 bg-dark">
         <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Heaven's Above 2020</p>
         </div>
     </footer>
 </body>
