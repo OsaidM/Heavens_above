@@ -127,9 +127,11 @@ def admin(request, u_id):
     else:
         users = User.objects.all()
         products = Product.objects.all()
+        orders = Order.objects.all()
         context={
         'myusers':users,
-        'myproducts':products
+        'myproducts':products,
+        'myorders':orders
         }
     return render(request, 'heaven_app/admin.html',context)
 def addadmin(request):
