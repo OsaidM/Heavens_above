@@ -100,6 +100,25 @@ class UserManager(models.Manager):
             errors["password"] = "password should be at least 8 characters long."
         return errors
 
+    def order_validator(self, postData):
+        errors = {}
+        if len(postData['o_name'])<2:
+            errors["o_name"] = "the name should be at least 2 characters long."
+        if (postData['o_name']).isalpha() !=True:
+            errors["o_name"] = "the name should be comprised only of letters."
+            
+        if len(postData['date_birth']) < 2:
+            errors["date_birth"] = "Make sure of the entered Birth Date syntax."
+            
+        if len(postData['address']) < 2:
+            errors["address"] = "Place of birth should be at least 2 characters long."
+        if (postData['address']).isalpha() !=True:
+            errors["address"] = "Place of birth should be comprised only of letters."
+
+        if len(postData['phone']) < 10:
+            errors["phone"] = "Phone should be 10 numbers long."
+        return errors
+
 class Role(models.Model):
     isAdmin = models.BooleanField(null=False)
     isUser = models.BooleanField(null=True)

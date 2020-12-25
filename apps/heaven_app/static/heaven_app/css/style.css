@@ -144,11 +144,16 @@ color: #333;
     .o_row{
         margin-bottom: 80px;
     }
+    .o_row > .o_column1{
+        text-align: center;
+    }
+    .o-img{
+        border-radius: 3px;
+        box-shadow: 0px 0px 8px 4px grey;
+        width: fit-content;
+    }
     .o_title{
         margin-left: 30px;
-    }
-    .o_price{
-        width: fit-content;
     }
     .d_row{
         margin-top: 0;
@@ -170,4 +175,15 @@ color: #333;
         padding: 5%;
         display: flex;
         justify-content: space-around;
+    }
+
+    .thank-you{
+        margin:50px 0;
+        text-align: center;
+    }
+    .thank-you > img{
+        border-radius: 5px;
+        box-shadow: 0px 0px 3px 2px grey;
+        width: 80%;
+        height: 50%;
     }
