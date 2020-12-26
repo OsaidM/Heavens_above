@@ -110,9 +110,6 @@
           <div class="card-body">
             <p class="card-text">We make beautiful star maps showing the unique alignment of the stars in a place and time chosen by you. Birthday, engagement, wedding.....</p>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
         </div>
       </div>
       <div class="col-lg-4 mb-4">
@@ -121,9 +118,6 @@
           <div class="card-body">
             <p class="card-text">Custom moon phase poster will bring back memories from your favorite nights. Now you can cherish your brightest moments and best memories under an identical sky! Truly unique moon phase gift.</p>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
         </div>
       </div>
       <div class="col-lg-4 mb-4">
@@ -131,9 +125,6 @@
           <h4 class="card-header">City Map</h4>
           <div class="card-body">
             <p class="card-text">takes your favorite cities, mountains, and places and turns them into beautiful works of art. If you're looking for the perfect way to remember that trip to Europe, honeymoon, place you got engaged, your alma mater, hometown, or anything else, our maps are a great way to display that nostalgia in your home. They make great gifts, too!</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
           </div>
         </div>
       </div>
@@ -154,7 +145,7 @@
       {%for p in product%}
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="details/{{p.id}}"><img class="card-img-top" src="{% static 'heaven_app/img/'%}{{p.image}}" alt=""></a>
+          <a href="details/{{p.id}}"><img class="card-img-top" src="{{p.image}}" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="details/{{p.id}}">{{p.title}}</a>
