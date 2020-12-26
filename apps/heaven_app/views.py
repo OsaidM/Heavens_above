@@ -265,9 +265,11 @@ def update(request, u_id):
 
 def thankyou(request):
     return render(request, 'heaven_app/thankyou.html')
+
 def updateabout(request):
     update=About.objects.get(id=1)
     update.title = request.POST['title']
     update.description = request.POST['description']
+    update.image = request.POST['image']
     update.save()
     return redirect ('/about')

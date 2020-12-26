@@ -172,6 +172,7 @@ class Order(models.Model):
 class About(models.Model):
     title = models.CharField(max_length = 45)
     description = models.TextField()
+    image = models.ImageField(blank = True, null = True)
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
 
