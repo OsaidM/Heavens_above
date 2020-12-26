@@ -37,7 +37,7 @@
                 {%if 'user_id' in request.session%}
                     {%if request.session.user_role %}
                 <li class="nav-item">
-                <a class="nav-link" href="/admin/{{request.session.user_id}}">DashBoard</a>
+                <a class="nav-link active" href="/admin/{{request.session.user_id}}">DashBoard</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
@@ -52,7 +52,7 @@
                 {%endif%}
                 {%else%}
                 <li class="nav-item active">
-                    <a class="nav-link" href="/signup">Login/Register</a>
+                    <a class="nav-link active" href="/signup">Login/Register</a>
                 </li>
                 {%endif%}
             </ul>
