@@ -32,4 +32,5 @@ urlpatterns = [
     path('addproduct', views.addproduct),
     path('addadmin', views.addadmin),
     path('thankyou', views.thankyou),
+    path('updateabout', views.updateabout)
 ]

@@ -141,10 +141,12 @@ def admin(request, u_id):
         users = User.objects.all()
         products = Product.objects.all()
         orders = Order.objects.all()
+        about1=About.objects.get(id=1)
         context={
         'myusers':users,
         'myproducts':products,
-        'myorders':orders
+        'myorders':orders,
+        'about_page':about1
         }
     return render(request, 'heaven_app/admin.html',context)
 def addadmin(request):
@@ -215,7 +217,11 @@ def contact(request):
     return render(request, 'heaven_app/contact.html')
 
 def about(request):
-    return render(request, 'heaven_app/about.html')
+    about1=About.objects.get(id=1)
+    context={
+        'about_page':about1
+    }
+    return render(request, 'heaven_app/about.html',context)
 
 def logout(request):
     if "user_id" in request.session:
@@ -259,3 +265,9 @@ def update(request, u_id):
 
 def thankyou(request):
     return render(request, 'heaven_app/thankyou.html')
+def updateabout(request):
+    update=About.objects.get(id=1)
+    update.title = request.POST['title']
+    update.description = request.POST['description']
+    update.save()
+    return redirect ('/about')
