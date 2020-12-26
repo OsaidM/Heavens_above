@@ -38,9 +38,6 @@ color: #333;
  * Copyright 2013-2020 Start Bootstrap
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-logomodern-business-nav/blob/master/LICENSE)
  */
-    body {
-    }
-    
     .carousel-item {
         height: 65vh;
         min-height: 300px;
