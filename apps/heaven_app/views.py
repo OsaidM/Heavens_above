@@ -269,5 +269,6 @@ def updateabout(request):
     update=About.objects.get(id=1)
     update.title = request.POST['title']
     update.description = request.POST['description']
+    update.image = request.POST['image']
     update.save()
     return redirect ('/about')
