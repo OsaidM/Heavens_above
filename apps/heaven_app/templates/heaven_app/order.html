@@ -62,7 +62,7 @@
         <!-- Portfolio Item Row -->
         <div class="row o_row">
             <div class="col-md-6 o_column1">
-                <img class="img-fluid o-img" src="{% static 'heaven_app/img/'%}{{myproduct.image}}" alt="">
+                <img class="img-fluid o-img" src="{{myproduct.image}}" alt="">
                 <br>
                 <h3 class="mt-4 mb-4 o_price">{{myproduct.price}}$</h3>
                 {% if messages %}

@@ -112,11 +112,8 @@ color: #333;
     }
 
     .search{
+        display: block!important;
         margin:20px auto  0px auto;
-    }
-    #button-addon2{
-        color: #fff;
-        background-color: #71446f;
     }
     .panel{
         width: 100%;

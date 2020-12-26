@@ -109,24 +109,31 @@ def order(request,p_id):
 def post_order(request,p_id):
     this_product = Product.objects.get(id=p_id)
     print(this_product, '/*' *15)
-    if request.method =='POST':
-        errors = User.objects.order_validator(request.POST)
-        if len(errors) > 0:
-            for key, value in errors.items():
-                messages.error(request, value)
-            return redirect('/order/'+ format(p_id))
+    if 'user_id' in request.session:
+        if request.method =='POST':
+            errors = User.objects.order_validator(request.POST)
+            if len(errors) > 0:
+                for key, value in errors.items():
+                    messages.error(request, value)
+                return redirect('/order/'+ format(p_id))
+            else:
+                this_name = request.POST['o_name']
+                this_date = request.POST['date_birth']
+                this_address = request.POST['address']
+                this_phone = request.POST['phone']
+                this_price = request.session['price']
+                Order.objects.create(name = this_name , date_of_birth =this_date, place_of_birth =this_address, phone = this_phone,total_price = this_price, user_id = User.objects.get(id = request.session['user_id']), product_id = Product.objects.get(id = p_id))
+                print(this_price, '/*\/' * 15)
+                del request.session['price']
+            return redirect('/thankyou')
         else:
-            this_name = request.POST['o_name']
-            this_date = request.POST['date_birth']
-            this_address = request.POST['address']
-            this_phone = request.POST['phone']
-            this_price = request.session['price']
-            Order.objects.create(name = this_name , date_of_birth =this_date, place_of_birth =this_address, phone = this_phone,total_price = this_price, user_id = User.objects.get(id = request.session['user_id']), product_id = Product.objects.get(id = p_id))
-            print(this_price, '/*\/' * 15)
-            del request.session['price']
-        return redirect('/thankyou')
+            return redirect('/')
     else:
-        return redirect('/')
+        error= 'You are not signed in'
+        context = {
+            'error':error
+        }
+        return render(request, 'heaven_app/signup.html', context)
 def admin(request, u_id):
     if request.session['user_role'] == False:
         return redirect('/')
@@ -212,6 +219,7 @@ def about(request):
 
 def logout(request):
     if "user_id" in request.session:
+        del request.session["user_role"]
         del request.session["user_id"]
     return redirect('/')
     
@@ -248,11 +256,6 @@ def update(request, u_id):
             updates.address=request.POST['address']
             updates.save()
             return redirect ('/account/' + format(u_id))
-
-def handler404(request, *args, **argv):
-    response = render_to_response('404.html', {},context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
 
 def thankyou(request):
     return render(request, 'heaven_app/thankyou.html')

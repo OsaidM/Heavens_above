@@ -35,6 +35,9 @@
     </nav>
     <!-- Page Content -->
     <main class="sign-up">
+        {% if error %}
+        <p class="text-danger">{{error}}</p>
+        {%endif%}
         {% if messages %}
         <ul class="messages">    
             {% for message in messages %}    

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -58,10 +56,10 @@
         </div>
     </nav>
 <!-- header-->
+{%if 'user_id' in request.session%}
+    {%if request.session.user_role %}
 <section class="py-5 header">
     <div class="container py-4">
-
-
         {% if messages %}
         <ul class="messages">    
             {% for message in messages %}    
@@ -93,7 +91,6 @@
                         <span class="font-weight-bold small text-uppercase">Create New Admin</span></a>
                     </div>
             </div>
-
 
             <div class="col-md-9">
                 <!-- Tabs content -->
@@ -205,12 +202,13 @@
 						<input type="text" class="form-control" id="description" name="description" placeholder="Enter Product Description">
 						</div>
 						<div class="form-group">
-						<label for="image">Select image</label>
-                        <input type="file" id="image" name="image" accept="image/*">
+						<label for="image">Add image link</label>
+                        <input type="text" class="form-control" id="image" name="image" placeholder="Enter Product image name or URL">
 						</div>
 						<button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
+
 					<div class="tab-pane fade shadow rounded p-5" id="v-pills-new-user" role="tabpanel" aria-labelledby="v-pills-new-user-tab">
                         <h4 class="font-italic mb-4">Create New Admin</h4>
 						<form action='/addadmin' method='post'>
@@ -243,7 +241,10 @@
         </div>
     </div>
 </section>
-
+{%endif%}
+{%else%}
+<h3 style="margin-top:50px; text-align:center"> you are not authorized to get in here</h3>
+{%endif%}
     <!-- Footer -->
     <footer class="py-4 bg-dark">
         <div class="container">
