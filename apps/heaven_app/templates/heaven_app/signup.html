@@ -15,24 +15,27 @@
 <body>
     
     <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-        <a class="navbar-brand" href="/">Heavens above</a>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+    <a class="navbar-brand" href="/">Heavens above</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
+                <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/about">About</a>
+                <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/contact">Contact</a>
+                <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
                 </li>
             </ul>
         </div>
-    </nav>
+</nav>
     <!-- Page Content -->
     <main class="sign-up">
         {% if error %}
@@ -140,5 +143,11 @@
             <p class="m-0 text-center text-white">Copyright &copy; Heaven's Above 2020</p>
         </div>
     </footer>
+
+    
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'heaven_app/js/jquery.min.js'%}"></script>
+    <script src="{% static 'heaven_app/js/bootstrap.bundle.min.js'%}"></script>
+
 </body>
 </html>
