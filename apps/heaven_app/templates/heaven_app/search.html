@@ -83,10 +83,10 @@
       {%for p in product%}
       <div class="col-lg-4 col-sm-6 portfolio-item">
         <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="https://assets-global.website-files.com/5e5a3c3d3c3e0f4cdde9f438/5ef340192b8c0f788c80fea6_luke-opt.jpg" alt=""></a>
+          <a href="details/{{p.id}}"><img class="card-img-top" src="https://assets-global.website-files.com/5e5a3c3d3c3e0f4cdde9f438/5ef340192b8c0f788c80fea6_luke-opt.jpg" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="#">{{p.title}}</a>
+              <a href="details/{{p.id}}">{{p.title}}</a>
             </h4>
             <p class="card-text">{{p.description}}</p>
           </div>

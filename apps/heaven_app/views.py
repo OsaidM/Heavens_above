@@ -201,8 +201,8 @@ def deleteproduct(request,id):
     product1.delete()
     return redirect('/admin/'+ format(request.session['user_id']))
 
-def deleteorder(request,id):
-    order1=Order.objects.get(id=id)
+def deleteorder(request,p_id):
+    order1=Order.objects.get(id=p_id)
     order1.delete()
     return redirect('/admin/'+ format(request.session['user_id']))
 
@@ -225,15 +225,24 @@ def about(request):
 
 def logout(request):
     if "user_id" in request.session:
-        del request.session["user_role"]
         del request.session["user_id"]
+    if "user_role" in request.session:
+        del request.session["user_role"]
     return redirect('/')
-    
+
 def like(request, p_id):
-    this_user = User.objects.get(id=request.session['user_id'])
-    this_product = Product.objects.get(id=p_id)
-    this_user.liked_products.add(this_product)
-    return redirect('/details/'+ format(p_id))
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        this_product = Product.objects.get(id=p_id)
+        this_user.liked_products.add(this_product)
+        return redirect('/details/'+ format(p_id))
+    else:
+        error= 'You are not signed in'
+        context = {
+            'error':error
+        }
+        return render(request, 'heaven_app/signup.html', context)
+    
 
 def review(request, p_id):
     this_user = User.objects.get(id=request.session['user_id'])
