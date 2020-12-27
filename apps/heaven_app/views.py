@@ -84,17 +84,28 @@ def autocomplete(request):
 def details(request,p_id):
     this_product = Product.objects.get(id=p_id)
     userslike=this_product.like.all()
+    page_num = request.GET.get('page')
+    request.session['price']= this_product.price
     this_product_reviews = Review.objects.filter(product_id = p_id)
     print(this_product_reviews, '/*' *15)
     paginator = Paginator(this_product_reviews, 2)
-    page_num = request.GET.get('page')
     page_obj = paginator.get_page(page_num)
-    request.session['price']= this_product.price
+    like_status = False
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        if this_user.liked_products.filter(id = this_product.id):
+            like_status = True
+            print('he liked the product', '/*'*15)
+        else:
+            like_status = False
+            print('he doesnt like the product', '/*'*15)
+        
     context= {
         'myproduct': this_product,
         'myreviews': this_product_reviews,
         'userslikes': userslike,
         'page_review': page_obj,
+        'like_status': like_status
     }
     return render(request, 'heaven_app/details.html',context)
 
@@ -135,20 +146,23 @@ def post_order(request,p_id):
         }
         return render(request, 'heaven_app/signup.html', context)
 def admin(request, u_id):
-    if request.session['user_role'] == False:
-        return redirect('/')
+    if 'user_id' in request.session:
+        if request.session['user_role'] == False:
+            return redirect('/')
+        else:
+            users = User.objects.all()
+            products = Product.objects.all()
+            orders = Order.objects.all()
+            about1=About.objects.get(id=1)
+            context={
+            'myusers':users,
+            'myproducts':products,
+            'myorders':orders,
+            'about_page':about1
+            }
+        return render(request, 'heaven_app/admin.html',context)
     else:
-        users = User.objects.all()
-        products = Product.objects.all()
-        orders = Order.objects.all()
-        about1=About.objects.get(id=1)
-        context={
-        'myusers':users,
-        'myproducts':products,
-        'myorders':orders,
-        'about_page':about1
-        }
-    return render(request, 'heaven_app/admin.html',context)
+        return redirect('/')
 def addadmin(request):
     if request.method =='POST':
         errors = User.objects.admin_validator(request.POST)
@@ -168,62 +182,95 @@ def addadmin(request):
             return redirect('/admin/'+ format(request.session['user_id']))
 
 def deleteuser(request,id):
-    user1=User.objects.get(id=id)
-    user1.delete()
-    return redirect('/admin/'+ format(request.session['user_id']))
+    if 'user_id' in request.session:
+        user1=User.objects.get(id=id)
+        user1.delete()
+        return redirect('/admin/'+ format(request.session['user_id']))
+    else:
+        return redirect('/')
 
 def addproduct(request):
-    title_from_form = request.POST['title']
-    description_from_form = request.POST['description']
-    price_from_form = request.POST['price']
-    image_from_form = request.POST['image']
-    Product.objects.create(title=title_from_form,description=description_from_form,price=price_from_form,image=image_from_form)
-    return redirect('/admin/'+ format(request.session['user_id']))
+    if 'user_id' in request.session:
+        title_from_form = request.POST['title']
+        description_from_form = request.POST['description']
+        price_from_form = request.POST['price']
+        image_from_form = request.POST['image']
+        Product.objects.create(title=title_from_form,description=description_from_form,price=price_from_form,image=image_from_form)
+        return redirect('/admin/'+ format(request.session['user_id']))
+    else:
+        return redirect('/')
 
 def editproduct(request,id):
-    product1=Product.objects.get(id=id)
-    context = {
-        "myproduct": product1,       
-    }
-    return render(request, "heaven_app/product.html", context)
+    if 'user_id' in request.session:
+        product1=Product.objects.get(id=id)
+        context = {
+            "myproduct": product1,       
+        }
+        return render(request, "heaven_app/product.html", context)
+    else:
+        return redirect('/')
 
 def updateproduct(request,id):
-    update = Product.objects.get(id=id)
-    update.title = request.POST['title']
-    update.price = request.POST['price']
-    update.image = request.POST['image']
-    update.description = request.POST['description']
-    update.save()
-    return redirect('/admin/'+ format(request.session['user_id']))
+    if 'user_id' in request.session:
+        if request.method =='POST':
+            update = Product.objects.get(id=id)
+            update.title = request.POST['title']
+            update.price = request.POST['price']
+            update.image = request.POST['image']
+            update.description = request.POST['description']
+            update.save()
+            return redirect('/admin/'+ format(request.session['user_id']))
+    else:
+        return redirect('/')
 
 def deleteproduct(request,id):
-    product1=Product.objects.get(id=id)
-    product1.delete()
-    return redirect('/admin/'+ format(request.session['user_id']))
+    if 'user_id' in request.session:
+        if request.method =='GET':
+            product1=Product.objects.get(id=id)
+            product1.delete()
+            return redirect('/admin/'+ format(request.session['user_id']))
+        else:
+            return redirect('/')
+    else:
+        return redirect('/')
 
 def deleteorder(request,p_id):
-    order1=Order.objects.get(id=p_id)
-    order1.delete()
-    return redirect('/admin/'+ format(request.session['user_id']))
+    if 'user_id' in request.session:
+        if request.method =='GET':
+            order1=Order.objects.get(id=p_id)
+            order1.delete()
+            return redirect('/admin/'+ format(request.session['user_id']))
+        else:
+            return redirect('/')
+    else:
+        return redirect('/')
 
 def showorder(request,o_id):
-    this_order=Order.objects.get(id=o_id)
-
-    context = {
-        "this_order": this_order,       
-    }
-    return render(request, "heaven_app/showorder.html", context)
+    if 'user_id' in request.session:
+        if request.method =='GET':
+            this_order=Order.objects.get(id=o_id)
+            context = {
+                "this_order": this_order,       
+            }
+            return render(request, "heaven_app/showorder.html", context)
+        else:
+            return redirect('/')
+    else:
+        return redirect('/')
 
 
 def account(request,u_id):
-    this_user=User.objects.get(id=u_id)
-    this_order = Order.objects.filter(id = this_user.id)
-    products = Product.objects.filter(id = this_order )
-    print(this_order, '/*' *15)
-    context={
-        'this_user': this_user,
-        'this_orders':this_order
-    }
+    if 'user_id' in request.session:
+        this_user=User.objects.get(id=u_id)
+        this_order = Order.objects.filter(id = this_user.id)
+        products = Product.objects.filter(id = this_order )
+        print(this_order, '/*' *15)
+        context={
+            'this_user': this_user,
+            'this_orders':this_order
+        }
+    else:
+        return redirect('/')
     return render(request, 'heaven_app/account.html',context)
 
 def contact(request):
@@ -255,14 +302,29 @@ def like(request, p_id):
             'error':error
         }
         return render(request, 'heaven_app/signup.html', context)
-    
+
+def removelike(request, p_id):
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        this_product = Product.objects.get(id=p_id)
+        this_user.liked_products.remove(this_product)
+        return redirect('/details/'+ format(p_id))
+    else:
+        error= 'You are not signed in'
+        context = {
+            'error':error
+        }
+        return render(request, 'heaven_app/signup.html', context)
 
 def review(request, p_id):
-    this_user = User.objects.get(id=request.session['user_id'])
-    this_product = Product.objects.get(id=p_id)
-    content_from_form = request.POST['content']
-    Review.objects.create(content=content_from_form,product_id=this_product,user_id=this_user)
-    return redirect('/details/'+ format(p_id))
+    if 'user_id' in request.session:
+        this_user = User.objects.get(id=request.session['user_id'])
+        this_product = Product.objects.get(id=p_id)
+        content_from_form = request.POST['content']
+        Review.objects.create(content=content_from_form,product_id=this_product,user_id=this_user)
+        return redirect('/details/'+ format(p_id))
+    else:
+        return redirect('/')
 
 def update(request, u_id):
     print('*'*80)
@@ -289,9 +351,12 @@ def thankyou(request):
     return render(request, 'heaven_app/thankyou.html')
 
 def updateabout(request):
-    update=About.objects.get(id=1)
-    update.title = request.POST['title']
-    update.description = request.POST['description']
-    update.image = request.POST['image']
-    update.save()
-    return redirect ('/about')
+    if 'user_id' in request.session:
+        update=About.objects.get(id=1)
+        update.title = request.POST['title']
+        update.description = request.POST['description']
+        update.image = request.POST['image']
+        update.save()
+        return redirect ('/about')
+    else:
+        return redirect('/')

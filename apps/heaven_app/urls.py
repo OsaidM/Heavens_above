@@ -24,6 +24,7 @@ urlpatterns = [
     path('contact', views.contact),
     path('admin/<int:u_id>', views.admin),
     path('like/<int:p_id>', views.like),
+    path('removelike/<int:p_id>', views.removelike),
     path('review/<int:p_id>', views.review),
     path('review', views.review),
     path('deleteuser/<int:id>', views.deleteuser),
