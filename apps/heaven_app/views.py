@@ -206,10 +206,23 @@ def deleteorder(request,p_id):
     order1.delete()
     return redirect('/admin/'+ format(request.session['user_id']))
 
+def showorder(request,o_id):
+    this_order=Order.objects.get(id=o_id)
+
+    context = {
+        "this_order": this_order,       
+    }
+    return render(request, "heaven_app/showorder.html", context)
+
+
 def account(request,u_id):
     this_user=User.objects.get(id=u_id)
+    this_order = Order.objects.filter(id = this_user.id)
+    products = Product.objects.filter(id = this_order )
+    print(this_order, '/*' *15)
     context={
-        'this_user': this_user
+        'this_user': this_user,
+        'this_orders':this_order
     }
     return render(request, 'heaven_app/account.html',context)
 

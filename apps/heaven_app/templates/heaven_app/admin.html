@@ -177,6 +177,7 @@
                             <th>Product Title</th>
                             <th>Product Price</th>
                             <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -188,6 +189,7 @@
                             <td>{{order.user_id.first_name}} {{order.user_id.last_name}}</td>
 							<td>{{order.product_id.title}}</td>
                             <td>{{order.product_id.price}}</td>
+                            <td><a href="/showorder/{{order.id}}">Show</a></td>
                             <td><a href="/deleteorder/{{order.id}}">Delete</a></td>
                         </tr>
 						{% endfor %}

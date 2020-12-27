@@ -18,6 +18,7 @@ urlpatterns = [
     path('order/post_order/<int:p_id>', views.post_order),
     path('account/<int:u_id>', views.account),
     path('update/<int:u_id>', views.update),
+    path('showorder/<int:o_id>', views.showorder),
     path('deleteorder/<int:p_id>', views.deleteorder),
     path('about', views.about),
     path('contact', views.contact),
