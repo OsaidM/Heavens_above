@@ -55,7 +55,7 @@
       </div>
   </nav>
     {%if request.session.user_role %}
-    <div class="container"> 
+    <div class="container mt-5"> 
       <table class="table">
         <thead>
           <tr>
@@ -79,12 +79,7 @@
         </tbody>
       </table>
     </div>
-    <!-- Footer -->
-    <footer class="py-4 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-      </div>
-    </footer>
+    
       {%else%}
     <h3 style="margin-top:100px; text-align:center"> you are not authorized to get in here</h3>
     {%endif%}
