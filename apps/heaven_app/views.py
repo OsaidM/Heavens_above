@@ -48,7 +48,7 @@ def login(request):
 
 def root(request):
     products = Product.objects.all()
-    paginator = Paginator(products, 10)
+    paginator = Paginator(products, 6)
     page_num = request.GET.get('page')
     page_obj = paginator.get_page(page_num)
     context = {
@@ -63,7 +63,7 @@ def search(request):
     print(query, '/*' *15)
     if query:
         products = products.filter(title__contains = query)
-    paginator = Paginator(products, 10)
+    paginator = Paginator(products, 6)
     page_num = request.GET.get('page')
     page_obj = paginator.get_page(page_num)
     context = {
