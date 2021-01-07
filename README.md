@@ -14,10 +14,10 @@ HeavensAbove website have administrator page that are secured and available to o
 * Sqlite 3.
 
 ## Screenshots:
-![capture1](./images/capture1.png)
-![capture2](./images/capture2.png)
-![capture3](./images/capture3.png)
-![capture4](./images/capture4.png)
+![capture1](https://raw.githubusercontent.com/OsaidM/Heavens_above/master/Capture1.png)
+![capture2](https://raw.githubusercontent.com/OsaidM/Heavens_above/master/Capture2.png)
+![capture3](https://raw.githubusercontent.com/OsaidM/Heavens_above/master/Capture3.png)
+![capture4](https://raw.githubusercontent.com/OsaidM/Heavens_above/master/Capture4.png)
 
 
 # Contact:
