@@ -14,8 +14,8 @@ HeavensAbove website have administrator page that are secured and available to o
 * Bootstrap 4,
 * Python 3.6,
 * Django 2.2.4,
-* Sqlite 3.
-* Ajax
+* Sqlite 3,
+* Ajax.
 ## Screenshots:
 ![capture1](https://raw.githubusercontent.com/OsaidM/Heavens_above/master/Capture1.png)
 ![capture2](https://raw.githubusercontent.com/OsaidM/Heavens_above/master/Capture2.png)
