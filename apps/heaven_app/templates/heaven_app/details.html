@@ -77,12 +77,28 @@
                 <p>{{myproduct.description}}</p>
                 <div class="row_for_buttons">
                     <br>
-                    <div class="col-md-4">
-                        <a href="/like/{{myproduct.id}}" class="btn btn-primary btn-product"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a> <b>{{userslikes.count}}</b>
-                    </div>
+                    {%if 'user_id' in request.session%}
+                        {%if like_status %}
+                        <div class="col-md-4">
+                            <a href="/removelike/{{myproduct.id}}"><button type="button" class="btn btn-secondary btn-md">Dislike</button></a> <b>{{userslikes.count}}</b>
+                        </div>
+                        <div class="col-md-8">
+                            <a href="/order/{{myproduct.id}}" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a>
+                        </div>
+                        {% else %}
+                        <div class="col-md-4">
+                            <a href="/like/{{myproduct.id}}" ><button type="button" class="btn btn-primary btn-md">Like</button></a> <b>{{userslikes.count}}</b>
+                        </div>
+                        <div class="col-md-8">
+                            <a href="/order/{{myproduct.id}}" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a>
+                        </div>
+                        {%endif%}
+                    {%else%}
+
                     <div class="col-md-8">
                         <a href="/order/{{myproduct.id}}" class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Order</a>
                     </div>
+                    {%endif%}
                 </div>
                 <br>
             </div>
