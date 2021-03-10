@@ -119,12 +119,18 @@ class UserManager(models.Manager):
             errors["phone"] = "Phone should be 10 numbers long."
         return errors
 
+
+
+
+
+
+
+
 class Role(models.Model):
     isAdmin = models.BooleanField(null=False)
     isUser = models.BooleanField(null=True)
     created_at = models.DateField(auto_now_add = True)
     updated_at = models.DateField(auto_now_add = True)
-
 
 
 class User(models.Model):
